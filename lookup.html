@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Lookup</title>
+
+<style>
+    body {
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 480px;
+        margin: 40px auto;
+        padding: 0 15px;
+        text-align: center;
+    }
+
+    input {
+        font-size: 20px;
+        padding: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    button {
+        margin-top: 12px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #result {
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+</style>
+</head>
+<body>
+
+<h2>Number Lookup</h2>
+
+<input
+    id="numInput"
+    type="number"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    placeholder="Enter number"
+>
+
+<button onclick="checkNumber()">Check</button>
+
+<div id="result"></div>
+
+<script>
+// Hard-coded line-separated list
+const numbersText = `
+903
+901
+892
+889
+898
+865
+125
+120
+118
+105
+086
+085
+082
+081
+080
+078
+077
+076
+074
+073
+072
+070
+069
+068
+067
+066
+065
+064
+063
+061
+060
+`;
+
+// Convert into a Set for fast lookup
+const numbers = new Set(
+    numbersText
+        .trim()
+        .split(/\s+/)
+);
+
+function checkNumber() {
+    const input = document.getElementById('numInput').value.trim();
+    const result = document.getElementById('result');
+
+    if (!input) {
+        result.textContent = 'Enter a number.';
+        result.style.color = 'black';
+        return;
+    }
+
+    if (numbers.has(input)) {
+        result.textContent = '✅ Number is in the list';
+        result.style.color = 'green';
+    } else {
+        result.textContent = '❌ Number is NOT in the list';
+        result.style.color = 'red';
+    }
+}
+</script>
+
+</body>
+</html>
